@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="DSProductDesigner">
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="25.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="NPObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="36.78038379530917">
+            <LayoutGroup Id="NPObject" RelativeSize="100">
+              <LayoutGroup Id="NPObject_col1" RelativeSize="99.93788819875776">
+                <LayoutGroup Id="Item2" ShowCaption="True" Caption="Setup" CaptionLocation="Top" Index="0" RelativeSize="40.41811846689895" Direction="Horizontal" IsNewNode="True">
+                  <LayoutItem Id="RailHeight" ViewItem="RailHeight" CaptionLocation="Top" Index="0" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="HangGap" ViewItem="HangGap" CaptionLocation="Top" Index="1" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="RailDetailGap" ViewItem="RailDetailGap" CaptionLocation="Top" Index="2" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="VerticalDetailGap" ViewItem="VerticalDetailGap" CaptionLocation="Top" Index="3" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="BackToBackGap" ViewItem="BackToBackGap" CaptionLocation="Top" Index="4" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="NewDetailCoatBothSides" ViewItem="NewDetailCoatBothSides" CaptionLocation="Top" Index="5" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="NewDetailAllowRotation" ViewItem="NewDetailAllowRotation" CaptionLocation="Top" Index="6" RelativeSize="16.7192429022082" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Height" RelativeSize="13.447432762836186" CaptionLocation="Top" Index="1" Removed="True" />
+                <LayoutGroup Id="Item1" ShowCaption="True" Caption="Detail Imput" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="36.23693379790941" IsNewNode="True">
+                  <LayoutItem Id="Width" ViewItem="Width" CaptionLocation="Top" Index="0" RelativeSize="13.8801261829653" IsNewNode="True" />
+                  <LayoutItem Id="Length" ViewItem="Length" CaptionLocation="Top" Index="1" RelativeSize="13.375394321766562" IsNewNode="True" />
+                  <LayoutItem Id="Height" ViewItem="Height" CaptionLocation="Top" Index="2" RelativeSize="13.375394321766562" IsNewNode="True" />
+                  <LayoutItem Id="StartX" ViewItem="StartX" CaptionLocation="Top" Index="3" RelativeSize="13.375394321766562" IsNewNode="True" />
+                  <LayoutItem Id="StartY" ViewItem="StartY" CaptionLocation="Top" Index="4" RelativeSize="13.375394321766562" IsNewNode="True" />
+                  <LayoutItem Id="StartZ" ViewItem="StartZ" CaptionLocation="Top" Index="5" RelativeSize="32.618296529968454" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="StartX" RelativeSize="13.647642679900745" CaptionLocation="Top" Index="1" Removed="True" />
+                <LayoutItem Id="StartY" RelativeSize="13.447432762836186" CaptionLocation="Top" Index="1" Removed="True" />
+                <LayoutItem Id="StartZ" RelativeSize="13.447432762836186" CaptionLocation="Top" Index="1" Removed="True" />
+                <LayoutGroup Id="Autoff49bbd5-6759-4993-a380-9466309ef169" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="23.34494773519164" IsNewNode="True">
+                  <LayoutItem Id="RailIndex" ViewItem="RailIndex" CaptionLocation="Top" Index="0" RelativeSize="49.96892479801119" IsNewNode="True" />
+                  <LayoutItem Id="Color" ViewItem="Color" CaptionLocation="Top" Index="1" RelativeSize="50.03107520198881" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Color" RelativeSize="16.08187134502924" CaptionLocation="Top" Index="2" Removed="True" />
+                <LayoutItem Id="RailIndex" RelativeSize="19.5906432748538" CaptionLocation="Top" Index="3" Removed="True" />
+                <LayoutItem Id="Length" RelativeSize="11.85344827586207" CaptionLocation="Top" Removed="True" />
+                <LayoutItem Id="Width" CaptionLocation="Top" RelativeSize="14.439655172413794" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="NPObject_col2" RelativeSize="0.062111801242236024" Caption="NPObject_col2">
+                <LayoutItem Id="BackToBackGap" RelativeSize="16.08187134502924" CaptionLocation="Top" Index="0" Removed="True" />
+                <LayoutItem Id="HangGap" RelativeSize="16.08187134502924" CaptionLocation="Top" Index="0" Removed="True" />
+                <LayoutItem Id="NewDetailAllowRotation" RelativeSize="100" CaptionLocation="Top" Index="0" Removed="True" />
+                <LayoutItem Id="RailDetailGap" RelativeSize="16.08187134502924" CaptionLocation="Top" Index="0" Removed="True" />
+                <LayoutItem Id="RailHeight" ViewItem="RailHeight" CaptionLocation="Top" Index="0" RelativeSize="16.381418092909534" Removed="True" />
+                <LayoutItem Id="VerticalDetailGap" RelativeSize="16.08187134502924" CaptionLocation="Top" Index="0" Removed="True" />
+                <LayoutItem Id="NewDetailCoatBothSides" ViewItem="NewDetailCoatBothSides" CaptionLocation="Top" Index="1" RelativeSize="83.2258064516129" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Entities_Group" Direction="Vertical" RelativeSize="63.21961620469083" Caption="Entities">
+            <LayoutItem Id="Entities" RelativeSize="100" Index="0" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

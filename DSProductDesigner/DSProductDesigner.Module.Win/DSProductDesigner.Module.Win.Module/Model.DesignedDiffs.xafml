@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="DSProductDesigner.Module.Win">
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="25.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="NPObject_DetailView">
+      <Items>
+        <ControlDetailItem Id="DSViewPort" ControlTypeName="DSViewPort" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="44.90690032858708">
+            <LayoutGroup Id="NPObject">
+              <LayoutGroup Id="NPObject_col1" RelativeSize="99.93442622950819">
+                <LayoutItem Id="DSViewPort" ViewItem="DSViewPort" Index="0" RelativeSize="12.5" IsNewNode="True" />
+                <LayoutGroup Id="Item2" Index="1" RelativeSize="32.95454545454545">
+                  <LayoutItem Id="RailHeight" RelativeSize="14.666666666666666" />
+                  <LayoutItem Id="HangGap" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="RailDetailGap" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="VerticalDetailGap" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="BackToBackGap" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="NewDetailCoatBothSides" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="NewDetailAllowRotation" RelativeSize="14.666666666666666" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item1" Index="2" RelativeSize="32.95454545454545">
+                  <LayoutItem Id="Width" RelativeSize="14.666666666666666" />
+                  <LayoutItem Id="Length" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="Height" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="StartX" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="StartY" RelativeSize="14.133333333333333" />
+                  <LayoutItem Id="StartZ" RelativeSize="28.8" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autoff49bbd5-6759-4993-a380-9466309ef169" Caption="Autoff49bbd5-6759-4993-a380-9466309ef169(20)" Index="3" RelativeSize="21.59090909090909">
+                  <LayoutItem Id="RailIndex" RelativeSize="49.93438320209974" />
+                  <LayoutItem Id="Color" RelativeSize="50.06561679790026" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="NPObject_col2" RelativeSize="0.06557377049180328" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Entities_Group" RelativeSize="55.09309967141292" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

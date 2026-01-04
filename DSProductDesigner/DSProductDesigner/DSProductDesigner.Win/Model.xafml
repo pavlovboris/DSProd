@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ExpressAppLogo">
+  <CreatableItems>
+    <CreatableItem ClassName="DSProductDesigner.Module.NPBusinessObjects.NPObject" Removed="True" />
+  </CreatableItems>
+  <NavigationItems NavigationStyle="Accordion" DefaultChildItemsDisplayStyle="List" />
+  <Options UIType="TabbedMDI" FormStyle="Ribbon" />
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="25.2.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="25.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="NPObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" IsCollapsibleGroup="True" TextAlignMode="AlignWithChildren">
+            <LayoutGroup Id="Autoa2c6cbbd-f2ee-41f1-906e-efca67a2de06" ShowCaption="False" Caption="Autoa2c6cbbd-f2ee-41f1-906e-efca67a2de06(3)" Direction="Horizontal" Index="0" RelativeSize="69.9167657550535" TextAlignMode="AlignWithChildren" IsNewNode="True">
+              <LayoutItem Id="DSViewPort" TextAlignMode="CustomSize" ViewItem="DSViewPort" CaptionLocation="Top" SizeConstraintsType="Custom" MinSize="65, 29" Index="0" RelativeSize="65.35742340926944" IsNewNode="True" />
+              <SplitterItem Id="SplitterItem2" Index="1" RelativeSize="1.4139827179890023" IsNewNode="True" />
+              <LayoutGroup Id="Entities_Group" ShowCaption="True" Caption="Entities" TextAlignMode="AlignWithChildren" IsCollapsibleGroup="True" Index="2" RelativeSize="33.228593872741556" IsNewNode="True">
+                <LayoutItem Id="Entities" ViewItem="Entities" SizeConstraintsType="Custom" MinSize="120, 120" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="NPObject" Index="1" RelativeSize="30.083234244946492">
+              <LayoutGroup Id="NPObject_col1" TextAlignMode="AlignWithChildren" RelativeSize="99.91941982272361">
+                <LayoutGroup Id="Auto7d4c0c49-68f1-44a1-8e16-568cd73f77ff" ShowCaption="False" Caption="Auto7d4c0c49-68f1-44a1-8e16-568cd73f77ff(6)" Direction="Horizontal" Index="0" RelativeSize="37.254901960784316" IsNewNode="True">
+                  <LayoutItem Id="RailHeight" ViewItem="RailHeight" CaptionLocation="Top" Index="0" RelativeSize="12.741935483870968" IsNewNode="True" />
+                  <LayoutItem Id="HangGap" ViewItem="HangGap" CaptionLocation="Top" Index="1" RelativeSize="12.096774193548388" IsNewNode="True" />
+                  <LayoutItem Id="RailDetailGap" ViewItem="RailDetailGap" CaptionLocation="Top" Index="2" RelativeSize="12.096774193548388" IsNewNode="True" />
+                  <LayoutItem Id="VerticalDetailGap" ViewItem="VerticalDetailGap" CaptionLocation="Top" Index="3" RelativeSize="12.17741935483871" IsNewNode="True" />
+                  <LayoutItem Id="BackToBackGap" ViewItem="BackToBackGap" CaptionLocation="Top" Index="4" RelativeSize="12.096774193548388" IsNewNode="True" />
+                  <LayoutItem Id="NewDetailCoatBothSides" ViewItem="NewDetailCoatBothSides" CaptionLocation="Top" Index="5" RelativeSize="18.79032258064516" IsNewNode="True" />
+                  <LayoutItem Id="NewDetailAllowRotation" ViewItem="NewDetailAllowRotation" CaptionLocation="Top" Index="6" RelativeSize="20" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item1" ShowCaption="True" Caption="Detail Imput" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="62.745098039215684" IsNewNode="True" Removed="True">
+                  <LayoutItem Id="Width" ViewItem="Width" CaptionLocation="Top" Index="0" RelativeSize="12.993421052631579" IsNewNode="True" />
+                  <LayoutItem Id="Length" ViewItem="Length" CaptionLocation="Top" Index="1" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="Height" ViewItem="Height" CaptionLocation="Top" Index="2" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="StartX" ViewItem="StartX" CaptionLocation="Top" Index="3" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="StartY" ViewItem="StartY" CaptionLocation="Top" Index="4" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="StartZ" ViewItem="StartZ" CaptionLocation="Top" Index="5" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="RailIndex" ViewItem="RailIndex" CaptionLocation="Top" Index="6" RelativeSize="12.335526315789474" IsNewNode="True" />
+                  <LayoutItem Id="Color" ViewItem="Color" CaptionLocation="Top" Index="7" RelativeSize="12.993421052631579" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item2" ShowCaption="True" Caption="Setup" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="22.686567164179106" TextAlignMode="UseParentOptions" Removed="True" />
+                <LayoutGroup Id="Autoff49bbd5-6759-4993-a380-9466309ef169" Index="3" RelativeSize="15.637860082304528" Direction="Horizontal" Removed="True">
+                  <LayoutItem Id="Color" RelativeSize="100" Index="0" Removed="True" />
+                  <LayoutItem Id="RailIndex" RelativeSize="49.96072270227808" Removed="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DSViewPort" RelativeSize="10.280373831775702" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="NPObject_col2" RelativeSize="0.08058017727639001" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Entities_Group" TextAlignMode="AlignWithChildren" RelativeSize="25.3880266075388" Index="2" IsCollapsibleGroup="True" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

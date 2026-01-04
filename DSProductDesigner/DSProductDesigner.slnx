@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="EasyTest" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="DSProductDesigner.Module.Win/DSProductDesigner.Module.Win.Module/DSProductDesigner.Module.Win.Module.csproj" />
+  <Project Path="DSProductDesigner/DSProductDesigner.Module/DSProductDesigner.Module.csproj" />
+  <Project Path="DSProductDesigner/DSProductDesigner.Win/DSProductDesigner.Win.csproj" />
+</Solution>

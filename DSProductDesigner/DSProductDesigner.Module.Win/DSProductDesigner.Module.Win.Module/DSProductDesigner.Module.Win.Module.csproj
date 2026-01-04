@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <OutputType>Library</OutputType>
+	  <TargetFramework>net10.0-windows7.0</TargetFramework>
+	  <CheckEolTargetFramework>false</CheckEolTargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
+	  <Deterministic>false</Deterministic>
+	  <AssemblyVersion>1.0.*</AssemblyVersion>
+	  <FileVersion>1.0.0.0</FileVersion>
+	  <Configurations>Debug;Release;EasyTest</Configurations>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="devDept.Eyeshot.Control.Win" Version="2026.0.17-beta" />
+    <PackageReference Include="DevExpress.ExpressApp" Version="25.2.*" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="25.2.*" />
+    <PackageReference Include="DevExpress.ExpressApp.ConditionalAppearance" Version="25.2.*" />
+    <PackageReference Include="DevExpress.ExpressApp.Validation" Version="25.2.*" />
+    <PackageReference Include="DevExpress.ExpressApp.Win" Version="25.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.Win.Design" Version="25.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="25.2.*" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="25.2.*" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="25.2.*" />
+    <PackageReference Include="DevExpress.Win" Version="25.2.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DSProductDesigner\DSProductDesigner.Module\DSProductDesigner.Module.csproj" />
+  </ItemGroup>
+</Project>
