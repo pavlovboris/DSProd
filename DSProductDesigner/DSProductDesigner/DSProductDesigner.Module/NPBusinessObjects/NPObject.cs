@@ -762,35 +762,27 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
         if (src == null || src.Count == 0)
             return Array.Empty<Entity>();
 
-        // 1) взимаме 2D профил – затворен LinearPath
-        LinearPath profile2D = src
-            .OfType<LinearPath>()
-            .FirstOrDefault(lp => lp.IsClosed);
+        var result = new List<Entity>();
 
-    if (profile2D == null)
-        return Array.Empty<Entity>();
+        foreach (var srcEnt in src.OfType<Entity>().Where(e => e is not Hatch))
+        {
+            var ent = (Entity)srcEnt.Clone();
+            ent.LayerName = string.Empty;
 
-    // 2) клонираме профила и махаме слоя
-    var profileClone = (LinearPath)profile2D.Clone();
-    profileClone.LayerName = string.Empty;
+            // 1) въртим профила от XY към XZ около (0,0,0)
+            ent.Rotate(Math.PI / 2, new devDept.Geometry.Vector3D(1, 0, 0));
+            // ако се окаже наопаки, смени на -Math.PI / 2
 
-    // 3) екструзираме по дължина на детайла -> получаваш 3D mesh
-    double length = item.Length;
+            // 2) позиционираме спрямо детайла – това ти беше правилно преди
+            ent.Translate(item.StartX, item.StartY, item.StartZ);
 
-    var solid = profileClone.ExtrudeAsMesh(
-        new devDept.Geometry.Vector3D(0, length, 0), // екструзия по Y
-        0.0,Mesh.natureType.ColorPlain);
+            //ent.ColorMethod = colorMethodType.byEntity;
+            ent.Color = item.Color;
 
-    // 4) завъртаме, за да влезе в твоята координатна система (както правеше с плоския профил)
-    solid.Rotate(Math.PI / 2, new devDept.Geometry.Vector3D(1, 0, 0));
+            result.Add(ent);
+        }
 
-    // 5) позиционираме спрямо детайла
-    solid.Translate(item.StartX, item.StartY, item.StartZ);
-
-    solid.ColorMethod = colorMethodType.byEntity;
-    solid.Color = item.Color;
-
-    return new Entity[] { solid };
+        return result;
     }
 
     private string GetDwgPathForType(int detailType)
