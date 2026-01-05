@@ -85,6 +85,9 @@ namespace DSProductDesigner.Module.DSEntities
         [Browsable(false)]
         public Entity LabelEntity { get; set; }
 
+        [Browsable(false)]
+        public DSComplexShape ComplexShape { get; set; }
+
         public int DetailType { get; set; }
 
         /// <summary>

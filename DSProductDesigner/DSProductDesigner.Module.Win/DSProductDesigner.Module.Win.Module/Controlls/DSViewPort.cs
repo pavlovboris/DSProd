@@ -2,6 +2,7 @@
 using devDept.Eyeshot.Entities;
 using DevExpress.ExpressApp;
 using DevExpress.XtraEditors;
+using DSProductDesigner.Module.DSEntities;
 using DSProductDesigner.Module.NPBusinessObjects;
 using System.ComponentModel;
 
@@ -64,13 +65,30 @@ public partial class DSViewPort : XtraUserControl,DevExpress.ExpressApp.Editors.
     {
         design1.Entities.Clear();
         design1.Entities.AddRange(NPObject.EntityList);
+
+        // нормализираме и добавяме DWG профилите за всеки детайл
+        foreach (var d in NPObject.Entities)
+        {
+            if (d.ComplexShape?.ComplexEntities == null || d.ComplexShape.ComplexEntities.Count == 0)
+                continue;
+
+            // нормализиране в правилната равнина и размер
+            NormalizeDetailProfile(d);
+
+            // добавяме ентитата към сцената
+            foreach (var ce in d.ComplexShape.ComplexEntities)
+            {
+                if (!design1.Entities.Contains(ce))
+                {
+                    design1.Entities.Add(ce);
+                }
+            }
+        }
+
         design1.Entities.Regen();
-
         design1.Invalidate();
-
         design1.Refresh();
         design1.ZoomFit();
-
     }
     public void SetRailVisible(int railIndex, bool visible)
     {
@@ -82,28 +100,37 @@ public partial class DSViewPort : XtraUserControl,DevExpress.ExpressApp.Editors.
             if (d.Entity is Entity ent)
             {
                 if (visible && !design1.Entities.Contains(ent))
-                {
                     design1.Entities.Add(ent, color: d.Color);
-                }
                 else if (!visible && design1.Entities.Contains(ent))
-                {
                     design1.Entities.Remove(ent);
-                }
             }
 
             if (d.LabelEntity is Entity labelEnt)
             {
                 if (visible && !design1.Entities.Contains(labelEnt))
-                {
                     design1.Entities.Add(labelEnt);
-                }
                 else if (!visible && design1.Entities.Contains(labelEnt))
-                {
                     design1.Entities.Remove(labelEnt);
+            }
+
+            // DWG профили за този детайл
+            if (d.ComplexShape?.ComplexEntities != null)
+            {
+                foreach (var ce in d.ComplexShape.ComplexEntities)
+                {
+                    if (visible && !design1.Entities.Contains(ce))
+                        design1.Entities.Add(ce);
+                    else if (!visible && design1.Entities.Contains(ce))
+                        design1.Entities.Remove(ce);
                 }
             }
         }
 
         design1.Invalidate();
+    }
+
+    private void NormalizeDetailProfile(DSEntityObject detail)
+    {
+        // засега не правим нищо – позиция и ротация са в NPObject
     }
 }

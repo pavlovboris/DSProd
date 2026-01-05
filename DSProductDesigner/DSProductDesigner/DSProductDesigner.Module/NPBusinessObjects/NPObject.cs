@@ -10,6 +10,7 @@ using DSProductDesigner.Module.DSEntities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 
 namespace DSProductDesigner.Module.NPBusinessObjects;
 
@@ -57,7 +58,10 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
 
                 item.Entity = box;
 
-                EntityList.Add(box, color: item.Color);
+                // вместо item.Color → правим го полупрозрачен или напълно прозрачен
+                // ако Eyeshot поддържа alpha: Color.FromArgb(50, item.Color)
+                // ако не – можеш да оставиш лек цвят + wireframe мода по-късно
+                EntityList.Add(box, color: Color.FromArgb(70, item.Color));
 
                 // Add text label to indicate one-sided / two-sided
                 string label = item.CoatBothSides ? "2S" : "1S";
@@ -80,6 +84,8 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
 
                 item.LabelEntity = textEntity;
                 EntityList.Add(textEntity);
+
+                DrawComplexShapeFor(item);
 
                 EntityListChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -677,4 +683,118 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
         }
     }
 
+    private void DrawComplexShapeFor(DSEntityObject item)
+    {
+        if (item.DetailType == 0)
+            return;
+
+        item.ComplexShape ??= ObjectSpace.CreateObject<DSComplexShape>();
+        item.ComplexShape.ShapeType = item.DetailType;
+        item.ComplexShape.ComplexEntities.Clear();
+
+        var entities = CreateProfileShapeEntities(item);
+        foreach (var ent in entities)
+        {
+            item.ComplexShape.ComplexEntities.Add(ent);
+            // не ги добавяме в EntityList тук
+        }
+    }
+
+    private Entity CreateComplexEntityFor(DSEntityObject item)
+    {
+        switch (item.DetailType)
+        {
+            case 1:
+                return CreateProfileShape(item);
+            case 2:
+                return CreatePerforatedPlate(item);
+            // ...
+            default:
+                return null;
+        }
+    }
+
+    private Entity CreatePerforatedPlate(DSEntityObject item)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Entity CreateProfileShape(DSEntityObject item)
+    {
+        string dwgPath = GetDwgPathForType(item.DetailType);
+        if (string.IsNullOrEmpty(dwgPath) || !File.Exists(dwgPath))
+            return null;
+
+        var readFile = new devDept.Eyeshot.Translators.ReadDWG(dwgPath);
+        readFile.DoWork();
+
+        var importedEntities = readFile.Entities;
+        if (importedEntities == null || importedEntities.Count == 0)
+            return null;
+
+        // взимаме първото подходящо entity
+        Entity ent = (Entity)importedEntities[0].Clone();
+
+        // МНОГО ВАЖНО: махаме DWG layer-а, за да не гърми за несъществуващ слой
+        // ако имаш дефиниран слой "0" в design1, можеш да сложиш "0"
+        ent.LayerName = string.Empty;
+
+        // позиционираме във вътрешността на нашия детайл
+        ent.Translate(item.StartX, item.StartY, item.StartZ);
+
+        ent.ColorMethod = colorMethodType.byEntity;
+        ent.Color = item.Color;
+
+        return ent;
+    }
+
+    private IList<Entity> CreateProfileShapeEntities(DSEntityObject item)
+    {
+        string dwgPath = GetDwgPathForType(item.DetailType);
+        if (string.IsNullOrEmpty(dwgPath) || !File.Exists(dwgPath))
+            return Array.Empty<Entity>();
+
+        var readFile = new devDept.Eyeshot.Translators.ReadDWG(dwgPath);
+        readFile.DoWork();
+
+        var src = readFile.Entities;
+        if (src == null || src.Count == 0)
+            return Array.Empty<Entity>();
+
+        var result = new List<Entity>();
+
+        foreach (var srcEnt in src.OfType<Entity>().Where(e => e is not Hatch))
+        {
+            var ent = (Entity)srcEnt.Clone();
+            ent.LayerName = string.Empty;
+
+            // 1) въртим профила от XY към XZ около (0,0,0)
+            ent.Rotate(Math.PI / 2, new devDept.Geometry.Vector3D(1, 0, 0));
+            // ако се окаже наопаки, смени на -Math.PI / 2
+
+            // 2) позиционираме спрямо детайла – това ти беше правилно преди
+            ent.Translate(item.StartX, item.StartY, item.StartZ);
+
+            ent.ColorMethod = colorMethodType.byEntity;
+            ent.Color = item.Color;
+
+            result.Add(ent);
+        }
+
+        return result;
+    }
+
+    private string GetDwgPathForType(int detailType)
+    {
+        // примитивен mapping; по-добре да го изнесеш в конфигурация/таблица
+        switch (detailType)
+        {
+            case 1:
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles", "Type1.dwg");
+            case 2:
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles", "Type2.dwg");
+            default:
+                return null;
+        }
+    }
 }
