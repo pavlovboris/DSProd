@@ -775,7 +775,7 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
             // 2) позиционираме спрямо детайла – това ти беше правилно преди
             ent.Translate(item.StartX, item.StartY, item.StartZ);
 
-            ent.ColorMethod = colorMethodType.byEntity;
+            //ent.ColorMethod = colorMethodType.byEntity;
             ent.Color = item.Color;
 
             result.Add(ent);
