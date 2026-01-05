@@ -1,4 +1,5 @@
 ﻿using devDept.Eyeshot.Entities;
+using devDept.Eyeshot.Meshing;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Model;
@@ -604,7 +605,7 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
         double candY = y;
         double candLength = l;
 
-        // Z: разширяваме новия детайл с VerticalDetailGap нагоре и надолу
+        // Z: разширяваме новия детайл с VerticalDetailGap нагоре и надола
         double candZ = z - VerticalDetailGap;
         double candHeight = h + 2 * VerticalDetailGap;
 
@@ -761,27 +762,35 @@ public class NPObject : NonPersistentBaseObject, IDSEntityHolder
         if (src == null || src.Count == 0)
             return Array.Empty<Entity>();
 
-        var result = new List<Entity>();
+        // 1) взимаме 2D профил – затворен LinearPath
+        LinearPath profile2D = src
+            .OfType<LinearPath>()
+            .FirstOrDefault(lp => lp.IsClosed);
 
-        foreach (var srcEnt in src.OfType<Entity>().Where(e => e is not Hatch))
-        {
-            var ent = (Entity)srcEnt.Clone();
-            ent.LayerName = string.Empty;
+    if (profile2D == null)
+        return Array.Empty<Entity>();
 
-            // 1) въртим профила от XY към XZ около (0,0,0)
-            ent.Rotate(Math.PI / 2, new devDept.Geometry.Vector3D(1, 0, 0));
-            // ако се окаже наопаки, смени на -Math.PI / 2
+    // 2) клонираме профила и махаме слоя
+    var profileClone = (LinearPath)profile2D.Clone();
+    profileClone.LayerName = string.Empty;
 
-            // 2) позиционираме спрямо детайла – това ти беше правилно преди
-            ent.Translate(item.StartX, item.StartY, item.StartZ);
+    // 3) екструзираме по дължина на детайла -> получаваш 3D mesh
+    double length = item.Length;
 
-            //ent.ColorMethod = colorMethodType.byEntity;
-            ent.Color = item.Color;
+    var solid = profileClone.ExtrudeAsMesh(
+        new devDept.Geometry.Vector3D(0, length, 0), // екструзия по Y
+        0.0,Mesh.natureType.ColorPlain);
 
-            result.Add(ent);
-        }
+    // 4) завъртаме, за да влезе в твоята координатна система (както правеше с плоския профил)
+    solid.Rotate(Math.PI / 2, new devDept.Geometry.Vector3D(1, 0, 0));
 
-        return result;
+    // 5) позиционираме спрямо детайла
+    solid.Translate(item.StartX, item.StartY, item.StartZ);
+
+    solid.ColorMethod = colorMethodType.byEntity;
+    solid.Color = item.Color;
+
+    return new Entity[] { solid };
     }
 
     private string GetDwgPathForType(int detailType)
